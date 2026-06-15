@@ -73,6 +73,8 @@ You'll now be able to access the website at `localhost:5000` or `127.0.0.1:5000`
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. 
+
+Universal tasks are tasks that will be merged into the main branch for all other branches to update from. Portfolio tasks are custom tasks that should live in a separate branch. Each person within the group will have their own branch that contains things specific to them and their portfolio. Pull requests are still required for review and feedback.
 
 Please make sure to update tests as appropriate.

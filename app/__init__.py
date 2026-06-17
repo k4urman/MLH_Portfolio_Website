@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template
+import markdown
+from flask import Flask, render_template, request
 from dotenv import load_dotenv
 
 from app.portfolio_data import ABOUT_TEXT, EDUCATION, HOBBIES, WORK_EXPERIENCES
@@ -12,6 +13,9 @@ app = Flask(__name__)
 def inject_nav():
     return dict(nav_pages=[
         {"label": "Home", "endpoint": "index"},
+        # "index" matches the function name below: def index()
+        # If we add blueprints later, this becomes "main.index" (blueprint_name.function_name)
+        {"label": "Experience", "endpoint": "work"},
         {"label": "Hobbies", "endpoint": "hobbies"},
         {"label": "Travel", "endpoint": "travel"},
     ])
@@ -20,7 +24,7 @@ def inject_nav():
 def index():
     return render_template(
         'index.html',
-        title="MLH Fellow",
+        title="Amandaleeanne Schock",
         url=os.getenv("URL"),
         about_text=ABOUT_TEXT,
         work_experiences=WORK_EXPERIENCES,
@@ -34,3 +38,8 @@ def hobbies():
 @app.route('/travel')
 def travel():
     return render_template('travel.html', title="Travel Map")
+
+
+@app.route('/experience')
+def work():
+    return render_template('work.html', title="Experience")

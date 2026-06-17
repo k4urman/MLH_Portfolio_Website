@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template
 from dotenv import load_dotenv
 
-from app.portfolio_data import ABOUT_TEXT, EDUCATION, HOBBIES, WORK_EXPERIENCES
+from app.portfolio_data import ABOUT_TEXT, EDUCATION, HOBBIES, WORK_EXPERIENCES, LOCATIONS
 
 load_dotenv()
 app = Flask(__name__)
@@ -15,7 +15,7 @@ def inject_nav():
         {"label": "Hobbies", "endpoint": "hobbies"},
         {"label": "Travel", "endpoint": "travel"},
     ],
-    url=os.getenv("URL") # reads from .env — will be localhost:5000 locally,
+    url=os.getenv("URL") # reads from .env — will be ocalhost:5000 locally,
                          # real domain in production when MLH deploys in future weeks
     )
 
@@ -36,4 +36,4 @@ def hobbies():
 
 @app.route('/travel')
 def travel():
-    return render_template('travel.html', title="Travel Map")
+    return render_template('travel.html', title="Travel Map", locations=LOCATIONS)

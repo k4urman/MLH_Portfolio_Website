@@ -174,3 +174,21 @@ body {
     margin: 0;
     line-height: 1.5;
 }
+
+
+/* travel page */
+
+.travel {
+    padding: 20px;
+}
+
+.travel h1 {
+    margin-bottom: 20px;
+}
+
+#travel-map {
+    height: 500px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}

@@ -21,6 +21,7 @@ def inject_nav():
         {"label": "Experience", "endpoint": "work"},
         {"label": "Hobbies", "endpoint": "hobbies"},
         {"label": "Travel", "endpoint": "travel"},
+        {"label": "Dev-Blog", "endpoint": "blog"},
     ])
 
 @app.route('/')
@@ -80,6 +81,9 @@ def travel():
     plot_html = pio.to_html(fig, full_html=False, include_plotlyjs='cdn')
     return render_template('travel.html', title="Travel Map", plot_html=plot_html)
 
+@app.route('/blog')
+def blog():
+    return render_template('blog.html', title="Dev-Blog")
 
 @app.route('/experience')
 def work():

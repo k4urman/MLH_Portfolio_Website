@@ -13,35 +13,67 @@
     <p>Below are my professional roles and education history</p>
   </header>
 
-    <section class="education-section">
-    <h2>Education</h2>
-    <div class="education-scroll">
-      <div class="education-row">
+  <div class="experience-layout">
+    
+    <div class="experience-left">
+      
+      <section class="education-section">
+        <h2>Education</h2>
+        <div class="education-grid">
+          {% for item in education %}
+          <article class="education-card">
+            <h3>{{ item.title }}</h3>
+            <p class="subtitle">{{ item.subtitle }}</p>
+            <p class="date">{{ item.date }}</p>
+            <p>{{ item.description }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="work-section">
+        <h2>Work Experience</h2>
+        <div class="work-grid">
+          {% for item in work_experiences %}
+          <article class="work-card">
+            <h3>{{ item.title }}</h3>
+            <p class="subtitle">{{ item.subtitle }}</p>
+            <p class="date">{{ item.date }}</p>
+            <p>{{ item.description }}</p>
+          </article>
+          {% else %}
+          <p>No work experience yet.</p>
+          {% endfor %}
+        </div>
+      </section>
+      
+    </div>
+
+    <aside class="experience-timeline">
+      <h2>Timeline</h2>
+      <div class="timeline-container">
         {% for item in education %}
-        <article class="education-card">
-          <h3>{{ item.title }}</h3>
-          <p class="subtitle">{{ item.subtitle }}</p>
-          <p class="date">{{ item.date }}</p>
-          <p>{{ item.description }}</p>
-        </article>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>{{ item.title }}</h3>
+            <p class="timeline-year">{{ item.date }}</p>
+          </div>
+        </div>
+        {% endfor %}
+
+        {% for item in work_experiences %}
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>{{ item.title }}</h3>
+            <p class="timeline-year">{{ item.date }}</p>
+          </div>
+        </div>
         {% endfor %}
       </div>
-    </div>
-  </section>
-
-  <section class="work-list">
-    <h2>Work Experience</h2>
-    {% for item in work_experiences %}
-    <article class="work-card">
-      <h3>{{ item.title }}</h3>
-      <p class="subtitle">{{ item.subtitle }}</p>
-      <p class="date">{{ item.date }}</p>
-      <p>{{ item.description }}</p>
-    </article>
-    {% else %}
-    <p>No work experience yet.</p>
-    {% endfor %}
-  </section>
-
+    </aside>
+    
+  </div>
 </main>
 {% endblock %}

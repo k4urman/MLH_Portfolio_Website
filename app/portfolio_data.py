@@ -1,6 +1,37 @@
 # portfolio data for templates
 
+# Social links — for profile section of index.html
+SOCIAL_LINKS = [
+    {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/cynthia-lee-wong-3940863/",
+        "icon": "img/icons/linkedin.svg"
+    },
+    {
+        "label": "GitHub",
+        "url": "https://github.com/musemod",
+        "icon": "img/icons/github.svg"
+    },
+
+]
+
 ABOUT_TEXT = "Hello! I'm an MLH Fellow passionate about merging tech, visuals, and music."
+WEBSITE_URL = "https://www.cynthialeewong.com"
+
+TECH_PROJECTS = [
+    {
+        "title": "Demo of portfolio with AI image generator page",
+        "description": "Showing a portfolio site built with React, Typescript featuring a custom AI image generator (uses ComfyUI as backend) and iterates off another open source project. Special thanks to SaladTechnologies",
+        "youtube_id": "MPYkVqzZrsQ",          # shows as clickable thumbnail
+        "github_url": "https://github.com/musemod/comfyui-api",  # link below card
+    },
+    {
+        "title": "Demo of offline, local AI Chatbot",
+        "description": "I architected an experimental offline/local AI branch feature (backend), drove the project's cache-aside strategy, and orchestrated its OS-agnostic ETL pipeline for dynamically seeding the PostgreSQL database.",
+        "youtube_id": "fdId_HpPuz8",
+        "github_url": "https://github.com/musemod/Offline_AI_Chatbot",                      # no GitHub link for this one
+    },
+]
 
 WORK_EXPERIENCES = [
     {
@@ -127,11 +158,7 @@ HOBBIES_MUSIC = [
         "description": "Mech Mania: Animated music video",
         "youtube_id": "HdbAjjiGmJA"
     },
-    {
-        "title": "In A Blink of An Eye",
-        "description": "Mech Mania: Animated music video",
-        "youtube_id": "EiG1VJJ3q8M"
-    },
+
 ]
 
 LOCATIONS = [

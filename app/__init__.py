@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template
 from dotenv import load_dotenv
 
-from app.portfolio_data import ABOUT_TEXT, EDUCATION, HOBBIES_ART, HOBBIES_MUSIC, WORK_EXPERIENCES, LOCATIONS
+from app.portfolio_data import SOCIAL_LINKS, ABOUT_TEXT, TECH_PROJECTS, WEBSITE_URL, EDUCATION, HOBBIES_ART, HOBBIES_MUSIC, WORK_EXPERIENCES, LOCATIONS
 
 load_dotenv()
 app = Flask(__name__)
@@ -23,11 +23,14 @@ def inject_nav():
 def index():
     return render_template(
         'index.html',
-        title="MLH Fellow",
+        title="Cynthia Lee Wong",
         url=os.getenv("URL"),
+        social_links=SOCIAL_LINKS,
         about_text=ABOUT_TEXT,
+        website_url=WEBSITE_URL,
         work_experiences=WORK_EXPERIENCES,
         education=EDUCATION,
+        tech_projects=TECH_PROJECTS
     )
 
 @app.route('/hobbies')

@@ -22,7 +22,10 @@ def inject_nav():
         {"label": "Hobbies", "endpoint": "hobbies"},
         {"label": "Travel", "endpoint": "travel"},
         {"label": "Dev-Blog", "endpoint": "blog"},
-    ])
+        ],
+        url=os.getenv("URL") # reads from .env — will be localhost:5000 locally,
+                         # real domain in production when MLH deploys in future weeks
+    )
 
 @app.route('/')
 def index():

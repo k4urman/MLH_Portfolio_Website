@@ -3,27 +3,42 @@ p, h1, h2, h3, h4, h5, h6, button {
 }
 
 body {
-    background-color: #f5f5f9;
+    background: linear-gradient(135deg, #f0f4ff 0%, #fff5f7 100%);
+    background-attachment: fixed;
     background-size: cover;
     width: auto; 
     overflow-x: hidden;
     font-family: "Roboto", serif;
     margin: 0px;
+    min-height: 100vh;
 }
 
 .nav-bar {
     width: 100%;
     display: inline-block;
-    background-color: #1C539F;
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
     font-family: "Roboto", serif;
     font-weight: 700 !important;
     padding-top: 10px;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .nav-content .logo-touch-target {
     display: inline-flex;
     height: 60%;
     width: 350px;
+}
+
+.nav-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 20px;
+    box-sizing: border-box;
 }
 
 .nav-content .nav-logo {
@@ -42,45 +57,97 @@ body {
 }
 
 .nav-content nav {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    text-align: right;
-    padding-top: 0px;
+    gap: 8px;
+    padding-top: 8px;
     padding-right: 0px;
 }
 
 .profile {
-    background-color: #1d539f !important;
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #ec4899 100%);
     text-align: center;
-    height: 320px;
+    min-height: 320px;
     margin-bottom: 50px;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: float 20s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
 }
 
 .profile h1 {
-        font-size: 50px;
-        font-weight: 700;
-        color: white;
+    font-size: 50px;
+    font-weight: 700;
+    color: white;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .profile img {
-        border-radius: 50%;
-        max-width: 100%;
-        max-height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;        
-        padding: 20px;
+    border-radius: 50%;
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;        
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 300ms ease;
+}
+
+.profile img:hover {
+    transform: scale(1.05) rotate(2deg);
 }
 
 .profile .profile-picture {
     margin-bottom: 30px;
     height: 200px;
+    position: relative;
+    z-index: 1;
 }
 
 .banner {
     padding: 20px 0px 50px 0px;
-    height: 150px;
-    background-color: #1d539f;
+    min-height: 150px;
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #ec4899 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+    opacity: 0.5;
 }
 
 .banner .logo {
@@ -88,16 +155,19 @@ body {
     max-height:60px;
     width: auto;
     height: auto;
+    position: relative;
+    z-index: 1;
 }
 
 .banner .title {
     color: white;
     font-size: 50px;
     font-weight: 700;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-
-/* navbar styling */
 
 .nav-content nav a {
     color: white;
@@ -106,71 +176,105 @@ body {
     display: inline-block;
     font-family: "Roboto", serif;
     font-weight: 700;
+    transition: all 200ms ease;
 }
 
 .nav-content nav a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
 }
 
 .nav-content nav a.active {
-    border-bottom: 3px solid white;
-}
-
-.page-content {
-    max-width: 900px;
-    margin: 0 auto 60px;
-    padding: 0 24px;
-}
-
-.about-section,
-.list-section {
-    background: white;
-    border-radius: 8px;
-    padding: 24px;
-    margin-bottom: 24px;
-}
-
-.about-section h2,
-.list-section h2 {
-    color: #1d539f;
-    margin-top: 0;
-}
-
-.list-item {
-    display: flex;
-    gap: 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.list-item:last-child {
     border-bottom: none;
-    padding-bottom: 0;
 }
 
-.list-item img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
+.nav-content nav a {
+    position: relative;
+}
+.nav-content nav a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    width: 100%;
+    height: 3px;
+    background: #fbbf24;
+    border-radius: 2px;
+    transition: transform 320ms cubic-bezier(.2,.8,.2,1);
+}
+.nav-content nav a:hover::after,
+.nav-content nav a.active::after {
+    transform: translateX(-50%) scaleX(1);
 }
 
-.list-item h3 {
-    margin: 0 0 8px;
+/* Responsive design */
+@media (max-width: 768px) {
+    .nav-logo img {
+        width: 160px;
+    }
+
+    .profile {
+        min-height: 280px;
+        padding: 30px 20px;
+    }
+
+    .profile h1 {
+        font-size: 40px;
+    }
+
+    .profile .profile-picture {
+        height: 160px;
+        margin-bottom: 20px;
+    }
+
+    .profile img {
+        padding: 15px;
+    }
+
+    .banner {
+        min-height: 120px;
+        padding: 15px 0 30px 0;
+    }
+
+    .banner .title {
+        font-size: 36px;
+    }
 }
 
-.list-item .subtitle {
-    margin: 0 0 4px;
-    font-weight: 500;
-}
+@media (max-width: 600px) {
+    .nav-content {
+        padding: 8px 16px;
+    }
 
-.list-item .date {
-    margin: 0 0 8px;
-    color: #777;
-    font-size: 0.9rem;
-}
+    .nav-logo img {
+        width: 140px;
+    }
 
-.list-item p {
-    margin: 0;
-    line-height: 1.5;
+    .nav-content nav {
+        gap: 4px;
+    }
+
+    .nav-content nav a {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .profile {
+        min-height: 240px;
+        margin-bottom: 30px;
+    }
+
+    .profile h1 {
+        font-size: 32px;
+    }
+
+    .profile .profile-picture {
+        height: 140px;
+    }
+
+    .banner .title {
+        font-size: 28px;
+    }
 }

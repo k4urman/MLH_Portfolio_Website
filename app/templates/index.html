@@ -2,21 +2,72 @@
 {% from "macros/list_section.html" import render_list_section %}
 
 {% block title %}{{ title }}{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dheereshag/coloured-icons@master/app/ci.min.css"/>
+{% endblock %}
 
 {% block content %}
 <div class="profile">
-    <div class="profile-picture">
-        <img src="{{ url_for('static', filename='img/logo.jpg') }}">
-    </div>
-    <h1>{{ title }}</h1>
+        <div id="profile-picture" class="profile-picture">
+                <img src="{{ url_for('static', filename='img/pfp.png') }}" alt="Profile picture">
+        </div>
+        <h1>{{ title }}</h1>
 </div>
 
-<main class="page-content">
-    <section class="about-section">
-        <h2>About Me</h2>
-        <p>{{ about_text }}</p>
+<main class="container">
+    <div class="profile-layout-grid">
+        
+        <section class="about">
+            <h2>About Me</h2>
+            <div class="about-text">
+                {{ about_html | safe }}
+            </div>
+        </section>
+
+        <div class="side-panel">
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Interested in working together? <a href="mailto:a-schock@outlook.com">a-schock@outlook.com</a></p>
+                <div class="contact-buttons">
+                    <a class="icon-btn btn-github" href="https://github.com/yourusername" target="_blank" rel="noopener" aria-label="GitHub">
+                        <i class="ci-md ci-github"></i>
+                    </a>
+                    <a class="icon-btn btn-linkedin" href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <i class="ci-md ci-linkedin"></i>
+                    </a>
+                </div>
+            </section>
+
+            <section class="skills">
+                <h2>Skills</h2>
+                <ul class="skills-list">
+                    {% for skill in skills %}
+                    <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <section class="projects">
+        <h2>Selected Projects</h2>
+        <div class="project-cards">
+            {% for item in personal_projects %}
+            <article class="card">
+                <h3>
+                    {% if item.link %}
+                    <a class="project-link" href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                    {% else %}
+                    {{ item.title }}
+                    {% endif %}
+                </h3>
+                <p>{{ item.description }}</p>
+            </article>
+            {% endfor %}
+        </div>
     </section>
-    {{ render_list_section("Work Experience", work_experiences) }}
-    {{ render_list_section("Education", education) }}
+
 </main>
+
 {% endblock %}

@@ -1,0 +1,342 @@
+
+/* Styles for the landing page (index.html) */
+.container {
+  max-width: 1000px;
+  margin: 0 auto 60px;
+  padding: 0 16px;
+}
+
+.profile-layout-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+  align-items: start;
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Reduced gap between side cards */
+}
+
+/* About Section */
+.about {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  box-shadow: none;
+  border: none;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #374151;
+  transition: none;
+}
+
+.about h2 {
+  color: #2563eb;
+  font-size: 28px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.about-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #374151;
+}
+
+.about-text p {
+  margin-bottom: 16px;
+}
+
+.about-text a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 200ms ease;
+}
+
+.about-text a:hover {
+  color: #7c3aed;
+}
+
+.contact, .skills {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+  padding: 20px; /* Reduced padding for smaller footprint */
+  border-radius: 14px; /* Slightly tighter rounding */
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.04); /* Subtler, less eye-catching shadow */
+  border: 1px solid rgba(37, 99, 235, 0.08);
+  transition: all 250ms ease;
+}
+
+.contact:hover, .skills:hover {
+  transform: translateY(-3px); /* Less dramatic hover lift */
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08); /* Softer hover glow */
+  border-color: rgba(37, 99, 235, 0.15);
+}
+
+.contact h2, .skills h2 {
+  margin-top: 0;
+  color: #2563eb;
+  font-size: 19px; 
+  margin-bottom: 12px;
+}
+
+.contact p {
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #4b5563;
+}
+
+.contact a {
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.contact a:hover {
+  color: #7c3aed;
+}
+
+.contact-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px; /* Tighter button spacing */
+  flex-wrap: wrap;
+}
+
+/* Downsized Rounded Square Buttons */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px; 
+  border-radius: 8px; 
+  background: white;
+  color: #2563eb;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+  transition: all 250ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+.icon-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.icon-btn i {
+  font-size: 22px;
+}
+
+.icon-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+.btn-linkedin {
+  background: linear-gradient(135deg, #9dcdfd 0%, #bfddfa 100%);
+  color: white;
+  border: none;
+}
+
+.btn-linkedin:hover {
+  background: linear-gradient(135deg, #085299 0%, #085299 100%);
+}
+
+.btn-github {
+  background: linear-gradient(135deg, #ffffff 0%, #afafaf 100%);
+  color: white;
+  border: none;
+}
+
+.btn-github:hover {
+  background: linear-gradient(135deg, #222 0%, #444 100%);
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+
+.skills-list li {
+  background: linear-gradient(135deg, #dbeafe 0%, #e9d5ff 100%);
+  color: #1e40af;
+  padding: 6px 12px; /* Tighter padding for smaller labels */
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.skills-list li:hover {
+  background: linear-gradient(135deg, #bfdbfe 0%, #d8b4fe 100%);
+  transform: scale(1.03);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.12);
+}
+
+/* Projects Section */
+.projects {
+  margin-bottom: 40px;
+}
+
+.projects h2 {
+  color: #2563eb;
+  font-size: 28px;
+  margin-bottom: 32px;
+}
+
+.project-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.card {
+  padding: 24px;
+  background: linear-gradient(135deg, #f0f4ff 0%, #fef3f7 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  transition: all 300ms ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.15);
+  background: linear-gradient(135deg, #dbeafe 0%, #fecdd3 100%);
+}
+
+.card h3 {
+  margin: 0;
+  color: #2563eb;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 0;
+  color: #4a5568;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.project-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 200ms ease;
+}
+
+.project-link:hover,
+.project-link:focus {
+  color: #7c3aed;
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .profile-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .project-cards {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .contact, .skills {
+    padding: 18px;
+  }
+
+  .contact h2, .skills h2 {
+    font-size: 18px;
+  }
+
+  .project-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .projects h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .about-text {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .contact, .skills {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .contact h2, .skills h2 {
+    font-size: 17px;
+  }
+
+  .contact-buttons {
+    gap: 10px;
+  }
+
+  .icon-btn {
+    padding: 8px;
+    border-radius: 6px;
+  }
+
+  .icon-btn i {
+    font-size: 20px;
+  }
+
+  .skills-list {
+    gap: 8px;
+  }
+
+  .skills-list li {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .projects h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+}

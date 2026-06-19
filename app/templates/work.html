@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Work Experience{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/work.css') }}">
+{% endblock %}
+
+{% block content %}
+<main class="page-content">
+  <header class="work-header">
+    <h1>Experience</h1>
+    <p>Below are my professional roles and education history</p>
+  </header>
+
+  <div class="experience-layout">
+    
+    <div class="experience-left">
+      
+      <section class="education-section">
+        <h2>Education</h2>
+        <div class="education-grid">
+          {% for item in education %}
+          <article class="education-card">
+            <h3>{{ item.title }}</h3>
+            <p class="subtitle">{{ item.subtitle }}</p>
+            <p class="date">{{ item.date }}</p>
+            <p>{{ item.description }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="work-section">
+        <h2>Work Experience</h2>
+        <div class="work-grid">
+          {% for item in work_experiences %}
+          <article class="work-card">
+            <h3>{{ item.title }}</h3>
+            <p class="subtitle">{{ item.subtitle }}</p>
+            <p class="date">{{ item.date }}</p>
+            <p>{{ item.description }}</p>
+          </article>
+          {% else %}
+          <p>No work experience yet.</p>
+          {% endfor %}
+        </div>
+      </section>
+      
+    </div>
+
+    <aside class="experience-timeline">
+      <h2>Timeline</h2>
+      <div class="timeline-container" id="timelineContainer">
+        {% for item in education %}
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>{{ item.title }}</h3>
+            <p class="timeline-year">{{ item.date }}</p>
+          </div>
+        </div>
+        {% endfor %}
+
+        {% for item in work_experiences %}
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>{{ item.title }}</h3>
+            <p class="timeline-year">{{ item.date }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </aside>
+    
+  </div>
+</main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("timelineContainer");
+    if (!container) return;
+    const items = Array.from(container.querySelectorAll(".timeline-item"));
+
+    // Helper function to extract and parse the start date string into a timestamp
+    function getStartTime(item) {
+      const dateText = item.querySelector(".timeline-year").textContent.trim();
+      const startPart = dateText.split(/[-–—]/)[0].trim();
+
+      // Attempt parsing standard "Month Year" or "Year" string formats
+      const parsedDate = new Date(startPart);
+      if (!isNaN(parsedDate.getTime())) {
+        return parsedDate.getTime();
+      }
+
+      // Fallback: If parsing fails, extract the first 4 digit numerical year encountered
+      const yearMatch = startPart.match(/\d{4}/);
+      return yearMatch ? new Date(yearMatch[0]).getTime() : 0;
+    }
+
+    // Sort ascending (Oldest dates first)
+    items.sort((a, b) => getStartTime(a) - getStartTime(b));
+
+    // Clear and append items back into the DOM structure sequentially
+    items.forEach(item => container.appendChild(item));
+  });
+</script>
+{% endblock %}

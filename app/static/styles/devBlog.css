@@ -1,0 +1,75 @@
+/* Dev-Blog Page Styles */
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100% !important; /* Overrides any global container max-widths */
+  margin: 0;
+  padding: 0 0 60px 0; /* Bottom padding gives the page breathing room when fully scrolled */
+  box-sizing: border-box;
+}
+
+/* Centered Header Section */
+.blog-header {
+  text-align: center;
+  padding: 40px 16px 24px;
+  background-color: #ffffff;
+}
+
+.blog-header h1 {
+  font-size: 36px;
+  margin: 0 0 8px 0;
+}
+
+.blog-header h1 a {
+  text-decoration: none;
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: opacity 200ms ease;
+}
+
+.blog-header h1 a:hover {
+  opacity: 0.85;
+}
+
+.blog-header p {
+  color: #4b5563;
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Deep, Extended Iframe Layout */
+.dev-blog-embed {
+  width: 100%;
+  
+  /* Pushes the page body downwards to create a long, scrollable canvas */
+  height: 1600px; 
+  min-height: 120vh; 
+  
+  border: none;
+  display: block;
+  background: #ffffff;
+}
+
+/* Mobile & Tablet Optimizations */
+@media (max-width: 768px) {
+  .blog-header {
+    padding: 28px 16px 20px;
+  }
+
+  .blog-header h1 {
+    font-size: 28px;
+  }
+
+  .blog-header p {
+    font-size: 14px;
+  }
+  
+  .dev-blog-embed {
+    /* Slightly shorter explicit height baseline for smaller viewports */
+    height: 1200px;
+  }
+}

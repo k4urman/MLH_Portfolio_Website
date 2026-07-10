@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="timeline-container">
+    <header class="timeline-header">
+        <h1>Project Timeline</h1>
+        <p>Leave a comment, share an update, or see what others are building.</p>
+    </header>
+
+    <!-- Form Section -->
+    <section class="timeline-form-section">
+        <h2>Create a New Post</h2>
+        <form id="timeline-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea id="content" name="content" rows="3" required placeholder="What's on your mind?"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Post to Timeline</button>
+        </form>
+    </section>
+
+    <!-- Feed Section -->
+    <section class="timeline-feed-section">
+        <h2>Latest Updates</h2>
+        <div id="posts-container">
+            <div id="loading-state">Loading timeline posts...</div>
+        </div>
+    </section>
+</div>
+
+<!-- Embedded CSS for standard styling without requiring external frameworks -->
+<style>
+    .timeline-container { max-w: 650px; margin: 2rem auto; padding: 0 1rem; font-family: sans-serif; }
+    .timeline-header { text-align: center; margin-bottom: 2rem; }
+    .timeline-header h1 { font-size: 2.25rem; margin-bottom: 0.5rem; color: #111827; }
+    .timeline-header p { color: #6b7280; margin: 0; }
+    
+    .timeline-form-section, .post-card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .timeline-form-section h2, .timeline-feed-section h2 { font-size: 1.25rem; margin-top: 0; margin-bottom: 1rem; color: #111827; }
+    
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; color: #374151; }
+    .form-group input, .form-group textarea { w-full: 100%; width: -webkit-fill-available; width: -moz-available; padding: 0.5rem 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; outline: none; }
+    .form-group input:focus, .form-group textarea:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); }
+    .form-group textarea { resize: none; }
+    
+    .submit-btn { width: 100%; background: #2563eb; color: white; border: none; padding: 0.625rem; font-size: 1rem; font-weight: 500; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
+    .submit-btn:hover { background: #1d4ed8; }
+    
+    #posts-container { display: flex; flex-direction: column; gap: 1rem; }
+    .post-card { margin-bottom: 0; transition: transform 0.2s; }
+    .post-card:hover { transform: translateY(-2px); }
+    .post-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+    .post-author h3 { margin: 0; font-size: 1rem; color: #111827; }
+    .post-author p { margin: 0; font-size: 0.75rem; color: #6b7280; }
+    .post-date { font-size: 0.75rem; color: #9ca3af; background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 9999px; }
+    .post-body { margin: 0; color: #4b5563; font-size: 0.937rem; line-height: 1.5; white-space: pre-line; }
+    
+    #loading-state, .empty-state { text-align: center; padding: 2rem; color: #9ca3af; font-style: italic; }
+    .empty-state { border: 2px dashed #e5e7eb; border-radius: 12px; font-style: normal; }
+</style>
+
+<!-- AJAX JavaScript API Logic -->
+<script>
+    const form = document.getElementById('timeline-form');
+    const postsContainer = document.getElementById('posts-container');
+
+    async function loadPosts() {
+        try {
+            const response = await fetch('/api/timeline_post');
+            const data = await response.json();
+            
+            postsContainer.innerHTML = '';
+            const posts = data.timeline_posts || [];
+
+            if (posts.length === 0) {
+                postsContainer.innerHTML = `
+                    <div class="empty-state">
+                        No posts yet. Be the first to share something!
+                    </div>
+                `;
+                return;
+            }
+
+            // Note: If your back-end doesn't sort by descending out-of-the-box, 
+            // you can uncomment the line below to guarantee newest items are up top:
+            // posts.sort((a, b) => b.id - a.id);
+
+            posts.forEach(post => {
+                const postCard = document.createElement('div');
+                postCard.className = 'post-card';
+                
+                const dateStr = post.created_at ? new Date(post.created_at).toLocaleString() : 'Just now';
+
+                postCard.innerHTML = `
+                    <div class="post-meta">
+                        <div class="post-author">
+                            <h3>${escapeHtml(post.name)}</h3>
+                            <p>${escapeHtml(post.email)}</p>
+                        </div>
+                        <span class="post-date">${dateStr}</span>
+                    </div>
+                    <p class="post-body">${escapeHtml(post.content)}</p>
+                `;
+                postsContainer.appendChild(postCard);
+            });
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+            postsContainer.innerHTML = '<div style="color: red; text-align: center;">Failed to load posts.</div>';
+        }
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const payload = new URLSearchParams();
+        payload.append('name', document.getElementById('name').value);
+        payload.append('email', document.getElementById('email').value);
+        payload.append('content', document.getElementById('content').value);
+
+        try {
+            const response = await fetch('/api/timeline_post', {
+                method: 'POST',
+                body: payload
+            });
+
+            if (response.ok) {
+                form.reset();
+                await loadPosts(); // Dynamically refresh feed list
+            } else {
+                const errData = await response.json();
+                alert(`Error: ${errData.message || response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Submission error:', error);
+            alert('Something went wrong. Please check your network connection.');
+        }
+    });
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    // Run on initial page layout target
+    loadPosts();
+</script>
+{% endblock %}

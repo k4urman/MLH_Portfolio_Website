@@ -46,6 +46,10 @@ def get_time_line_post():
                 ]
         }
 
+# create Timeline Post Page
+@app.route('/timeline')
+def timeline():
+    return render_template('timeline.html',title="Timeline")
 
 # adds nav links to every template
 @app.context_processor

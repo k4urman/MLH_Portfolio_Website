@@ -2,7 +2,7 @@ import os
 import datetime
 from peewee import *
 from playhouse.shortcuts import model_to_dict
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from dotenv import load_dotenv
 
 from app.portfolio_data import ABOUT_TEXT, CONTACT, EDUCATION, HOBBIES, WORK_EXPERIENCES
@@ -10,7 +10,11 @@ from app.portfolio_data import ABOUT_TEXT, CONTACT, EDUCATION, HOBBIES, WORK_EXP
 load_dotenv()
 app = Flask(__name__)
 
-mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),user=os.getenv("MYSQL_USER"),password=os.getenv("MYSQL_PASSWORD"),host=os.getenv("MYSQL_HOST"),port=3306)
+mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+                     user=os.getenv("MYSQL_USER"),
+                     password=os.getenv("MYSQL_PASSWORD"),
+                     host=os.getenv("MYSQL_HOST"),
+                     port=3306)
 
 print(mydb)
 
@@ -46,10 +50,19 @@ def get_time_line_post():
                 ]
         }
 
+@app.route('/api/timeline_post/<int:post_id>', methods=['DELETE'])
+def delete_time_line_post(post_id):
+    post = TimelinePost.get_or_none(TimelinePost.id == post_id)
+    if post is None:
+        return {'error': 'Timeline post not found'}, 404
+
+    post.delete_instance()
+    return {'deleted': post_id}
+
 # create Timeline Post Page
 @app.route('/timeline')
 def timeline():
-    return render_template('timeline.html',title="Timeline")
+        return render_template('timeline.html',title="Timeline")
 
 # adds nav links to every template
 @app.context_processor
@@ -65,20 +78,20 @@ def inject_nav():
 
 @app.route('/')
 def index():
-    return render_template(
-        'index.html',
-        title="Maninder (Kaurman) Kaur",
-        url=os.getenv("URL"),
-        about_text=ABOUT_TEXT,
-        contact=CONTACT,
-        work_experiences=WORK_EXPERIENCES,
-        education=EDUCATION,
-    )
+        return render_template(
+                'index.html',
+                title="Maninder (Kaurman) Kaur",
+                url=os.getenv("URL"),
+                about_text=ABOUT_TEXT,
+                contact=CONTACT,
+                work_experiences=WORK_EXPERIENCES,
+                education=EDUCATION,
+        )
 
 @app.route('/hobbies')
 def hobbies():
-    return render_template('hobbies.html', title="Hobbies", hobbies=HOBBIES)
+        return render_template('hobbies.html', title="Hobbies", hobbies=HOBBIES)
 
 @app.route('/travel')
 def travel():
-    return render_template('travel.html', title="Travel Map")
+        return render_template('travel.html', title="Travel Map")

@@ -10,11 +10,10 @@ cd "$PROJECT_DIR" || { echo "Directory not found!"; exit 1; }
 echo "Fetching latest changes from GitHub..."
 git fetch && git reset origin/main --hard
 
-echo "Activating virtual environment and installing dependencies..."
-source python3-virtualenv/bin/activate
-pip install -r requirements.txt
+echo "Stopping containers..."
+docker compose -f docker-compose.prod.yml down
 
-echo "Restarting the portfolio system service..."
-sudo systemctl restart myportfolio
+echo "Building and launching updated containers..."
+docker compose -f docker-compose.prod.yml up -d --build
 
-echo "Redeployment completed successfully via systemd service!"
+echo "Docker redepoly completed!"

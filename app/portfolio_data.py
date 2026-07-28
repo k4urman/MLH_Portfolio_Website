@@ -14,6 +14,19 @@ CONTACT = {
 
 WORK_EXPERIENCES = [
     {
+        "title": "Production Engineering Fellow",
+        "subtitle": "Meta x Major League Hacking",
+        "date": "June 2026 – Sept 2026",
+        "description": (
+            "Selected for the Production Engineering track of the MLH Fellowship powered by Meta, "
+            "engaging in a competitive, 12-week program featuring mentorship from Meta engineers and "
+            "a Linux Foundation curriculum. Operating within a small engineering pod, I am mastering "
+            "core Production Engineering (PE) and Site Reliability Engineering (SRE) concepts, with a deep "
+            "focus on system architecture, Linux internals, network protocols, scripting, CI/CD, "
+            "observability, incident response, and reliability at scale."
+        ),
+    },
+    {
         "title": "Teaching Assistant",
         "subtitle": "Corteva Agriscience · Indianapolis, IN",
         "date": "May 2025 – May 2026",

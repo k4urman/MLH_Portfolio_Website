@@ -2,7 +2,7 @@
 
 ABOUT_TEXT = (
     "B.S. Computer Science student at Purdue University with a minor in Mathematics. "
-    "Interested in AI/ML, software engineering, and building tools that make data more accessible."
+    "Interested in AI/ML (specifically robotics), data analytics, software engineering, and building tools that make life easier."
 )
 
 CONTACT = {
@@ -29,7 +29,7 @@ WORK_EXPERIENCES = [
     {
         "title": "Teaching Assistant",
         "subtitle": "Corteva Agriscience · Indianapolis, IN",
-        "date": "May 2025 – May 2026",
+        "date": "Aug 2025 – May 2026",
         "description": (
             "Partnered with The Purdue Data Mine and led a team of undergraduate researchers "
             "in developing an AI-powered chatbot for Formulation Sciences using LangGraph, Python, "
@@ -40,7 +40,7 @@ WORK_EXPERIENCES = [
     {
         "title": "Campus Ambassador",
         "subtitle": "Autodesk · Indianapolis, IN",
-        "date": "Aug 2025 – May 2026",
+        "date": "July 2025 – May 2026",
         "description": (
             "Organized and facilitated 7 technical workshops, hackathons, and campus tabling events "
             "to promote Autodesk's design and engineering software suite to Purdue students. "

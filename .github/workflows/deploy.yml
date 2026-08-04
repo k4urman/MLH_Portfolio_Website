@@ -1,9 +1,10 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Run Tests"]
+    branches: [main]
+    types: [completed]
   workflow_dispatch:
 
 jobs:
@@ -30,3 +31,21 @@ jobs:
 
       - name: Deploy site
         run: ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && chmod +x redeploy-site.sh && ./redeploy-site.sh'
+
+      - name: Print out container status
+        run: ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && docker compose ps'
+
+      - name: Send Discord Notification on Deployment Success
+        if: success()
+        run: |
+          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
+          -H "Content-Type: application/x-www-form-urlencoded" \
+          -d "content= Deployment Successful"
+
+      - name: Send Discord Message on Deployment Failure
+        if: failure()
+        run: |
+          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
+          -H "Content-Type: application/x-www-form-urlencoded" \
+          -d "content= Deployment Failed"
+
